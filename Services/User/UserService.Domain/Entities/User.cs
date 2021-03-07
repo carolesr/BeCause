@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Domain
+namespace UserService.Domain.Entities
 {
     public class User
     {
-        public int IdUser { get; set; }
+        public Guid IdUser { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public int Phone { get; set; }

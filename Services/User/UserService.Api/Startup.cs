@@ -1,3 +1,4 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
+using UserService.Core.Mappers;
 
 namespace UserService.Api
 {
@@ -47,6 +49,18 @@ namespace UserService.Api
             #region MediatR
 
             services.AddMediatR(AppDomain.CurrentDomain.Load("DemoMediatrAspNetCore.Application"));
+
+            #endregion
+
+            #region AutoMapper
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             #endregion
         }

@@ -5,32 +5,27 @@ using UserService.Domain.Entities;
 using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
+using AutoMapper;
 
 namespace UserService.Core.Handlers
 {
     public class CreateUserHandler : IRequestHandler<CreateUserRequest, CreateUserResponse>
     {
-        public CreateUserHandler() { }
+        IMapper _mapper;
+
+        public CreateUserHandler(IMapper mapper) 
+        {
+            _mapper = mapper;
+        }
 
         public Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
-            var user = new User
-            {
-                Name = "foolano",
-                Email = "foo@lano.com",
-                Phone = 99999999
-            };
+            var user = _mapper.Map<User>(request);
 
-            //_service.Create(user);
+            //user = _service.Create(user);
 
-            var response = new CreateUserResponse
-            {
-                IdUser = user.IdUser,
-                Name = user.Name,
-                Email = user.Email,
-                Phone = user.Phone,
-                SignUpDate = DateTime.Now
-            };
+            var response = _mapper.Map<CreateUserResponse>(user);
+            response.SignUpDate = DateTime.Now;
 
             return Task.FromResult(response);
         }

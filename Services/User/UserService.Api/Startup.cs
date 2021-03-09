@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,25 +25,15 @@ namespace UserService.Api
         {
             services.AddControllers();
 
+            #region Swagger
+
             // Register the Swagger generator
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "ToDo API",
-                    Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://example.com/terms"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Shayne Boyer",
-                        Email = string.Empty,
-                        Url = new Uri("https://twitter.com/spboyer"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Use under LICX",
-                        Url = new Uri("https://example.com/license"),
-                    }
+                    Title = "BeCause API",
+                    Description = "A simple example ASP.NET Core Web API"
                 });
 
                 // Set the comments path for the Swagger JSON and UI.
@@ -50,6 +41,14 @@ namespace UserService.Api
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            #endregion
+
+            #region MediatR
+
+            services.AddMediatR(AppDomain.CurrentDomain.Load("DemoMediatrAspNetCore.Application"));
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +70,8 @@ namespace UserService.Api
                 endpoints.MapControllers();
             });
 
+            #region Swagger
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
@@ -78,6 +79,8 @@ namespace UserService.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+
+            #endregion
         }
     }
 }

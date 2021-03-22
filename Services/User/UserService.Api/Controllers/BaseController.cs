@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using UserService.Core.Requests;
 
 namespace UserService.Api.Controllers
 {
@@ -15,9 +16,9 @@ namespace UserService.Api.Controllers
             _mediator = mediator;
         }
 
-        public ActionResult Handle(IRequest request)
+        public ActionResult Handle(Request request)
         {
-            return Ok(_mediator.Send(request));
+            return Ok(_mediator.Send(request).Result);
         }
     }
 }

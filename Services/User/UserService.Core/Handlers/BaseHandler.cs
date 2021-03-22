@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -9,11 +7,22 @@ using UserService.Core.Requests;
 
 namespace UserService.Core.Handlers
 {
-    public class BaseHandler : IRequestHandler<Request, Response>
+    public abstract class BaseHandler<T> : IRequestHandler<T, Response> where T : Request
     {
-        Task<Response> IRequestHandler<Request, Response>.Handle(Request request, CancellationToken cancellationToken)
+        public BaseHandler() { }
+        
+        public Task<Response> Handle(T request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return this.SafeExecuteHandler(request, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                return Task.FromResult<Response>(new Response(e.Message));
+            }
         }
+
+        public abstract Task<Response> SafeExecuteHandler(T request, CancellationToken cancellationToken) ;
     }
 }

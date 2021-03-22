@@ -12,7 +12,7 @@ using MediatR;
 namespace UserService.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("User")]
     public class UserController : BaseController
     {
         private readonly IMediator _mediator;
@@ -25,14 +25,15 @@ namespace UserService.Api.Controllers
         /// <summary>
         /// Creates new User.
         /// </summary>
-        /// <param name="request"></param>
+        ///// <param name="request"></param>
         /// <returns>A newly created User</returns>
         /// <response code="201">Returns the newly created item</response>
         /// <response code="400">If the item is null</response> 
         [HttpGet]
-        public ActionResult CreateUser(CreateUserRequest request)
+        [Route("CreateUser")]
+        public ActionResult CreateUser()
         {
-
+            var request = new CreateUserRequest { Name="robson", Email = "email@email", Phone = 999999999 };
             var response = this.Handle(request);
 
             return response;            

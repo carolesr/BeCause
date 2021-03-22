@@ -3,42 +3,50 @@ using UserService.Core.Responses;
 using UserService.Core.Requests;
 using UserService.Core.Validations;
 using UserService.Domain.Entities;
-using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
 using AutoMapper;
 
 namespace UserService.Core.Handlers
 {
-    public class CreateUserHandler : IRequestHandler<CreateUserRequest, CreateUserResponse>
+    public class CreateUserHandler : BaseHandler<CreateUserRequest> //where T : CreateUserRequest
     {
         IMapper _mapper;
-        UserValidator _validator;
+        //UserValidator _validator;
 
-        public CreateUserHandler(IMapper mapper, UserValidator validator) 
+        public CreateUserHandler(IMapper mapper/*, UserValidator validator*/)
         {
             _mapper = mapper;
-            _validator = validator;
+            //_validator = validator;
         }
 
-        public Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
+        public override Task<Response> SafeExecuteHandler(CreateUserRequest request, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<User>(request);
-            var validation = _validator.Validate(user);
+            return CreateUser(request, cancellationToken);
+        }
 
-            if (!validation.IsValid)
-            {
-                foreach (var failure in validation.Errors)
-                    Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
-                //return Exception;
-            }
+        public Task<Response> CreateUser(CreateUserRequest request, CancellationToken cancellationToken)
+        {
+            Response response = new Response();
+
+            var user = _mapper.Map<User>(request);
+            //var validation = _validator.Validate(user);
+            //if (!validation.IsValid)
+            //{
+            //    foreach (var failure in validation.Errors)
+            //        response = response.AddMessage("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+
+            //    return Task.FromResult(response);
+            //}
 
             //user = _service.Create(user);
 
-            var response = _mapper.Map<CreateUserResponse>(user);
-            response.SignUpDate = DateTime.Now;
+            var newUser = _mapper.Map<CreateUserResponse>(user);
+            newUser.SignUpDate = DateTime.Now;
 
-            return Task.FromResult(response);            
+            response = response.AddObject(newUser);
+
+            return Task.FromResult(response);
         }
     }
 }

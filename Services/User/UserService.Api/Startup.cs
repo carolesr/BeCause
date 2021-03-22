@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using UserService.Core.Mappers;
+using FluentValidation;
 
 namespace UserService.Api
 {
@@ -30,7 +31,8 @@ namespace UserService.Api
             #region Swagger
 
             // Register the Swagger generator
-            services.AddSwaggerGen(c => {
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
@@ -48,7 +50,7 @@ namespace UserService.Api
 
             #region MediatR
 
-            services.AddMediatR(AppDomain.CurrentDomain.Load("DemoMediatrAspNetCore.Application"));
+            services.AddMediatR(AppDomain.CurrentDomain.Load("UserService.Core"));
 
             #endregion
 
@@ -61,6 +63,10 @@ namespace UserService.Api
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            #endregion
+
+            #region FluentValidation
 
             #endregion
         }

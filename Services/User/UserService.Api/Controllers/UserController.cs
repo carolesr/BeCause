@@ -8,6 +8,7 @@ using UserService.Core.Requests;
 using UserService.Core.Responses;
 using UserService.Core.Validations;
 using MediatR;
+using System.Threading.Tasks;
 
 namespace UserService.Api.Controllers
 {
@@ -31,10 +32,10 @@ namespace UserService.Api.Controllers
         /// <response code="400">If the item is null</response> 
         [HttpGet]
         [Route("CreateUser")]
-        public ActionResult CreateUser()
+        public async Task<ActionResult> CreateUser()
         {
             var request = new CreateUserRequest { Name="robson", Email = "email@email", Phone = 999999999 };
-            var response = this.Handle(request);
+            var response = await this.Handle(request);
 
             return response;            
         }

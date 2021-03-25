@@ -11,15 +11,15 @@ namespace UserService.Core.Handlers
     {
         public BaseHandler() { }
         
-        public Task<Response> Handle(T request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(T request, CancellationToken cancellationToken)
         {
             try
             {
-                return this.SafeExecuteHandler(request, cancellationToken);
+                return await SafeExecuteHandler(request, cancellationToken);
             }
             catch (Exception e)
             {
-                return Task.FromResult<Response>(new Response(e.Message));
+                return new Response(e.Message);
             }
         }
 

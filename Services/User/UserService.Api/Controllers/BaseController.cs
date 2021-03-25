@@ -16,9 +16,10 @@ namespace UserService.Api.Controllers
             _mediator = mediator;
         }
 
-        public ActionResult Handle(Request request)
+        public async Task<ActionResult> Handle(Request request)
         {
-            return Ok(_mediator.Send(request).Result);
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
     }
 }

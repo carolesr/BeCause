@@ -10,7 +10,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using UserService.Core.Mappers;
-using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace UserService.Api
 {
@@ -26,25 +26,26 @@ namespace UserService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(AppDomain.CurrentDomain.Load("UserService.Core")));
 
             #region Swagger
 
             // Register the Swagger generator
             services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Version = "v1",
-                    Title = "BeCause API",
-                    Description = "A simple example ASP.NET Core Web API"
-                });
+                    c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Version = "v1",
+                        Title = "BeCause API",
+                        Description = "A simple example ASP.NET Core Web API"
+                    });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                    c.IncludeXmlComments(xmlPath);
+                });
 
             #endregion
 
@@ -66,9 +67,6 @@ namespace UserService.Api
 
             #endregion
 
-            #region FluentValidation
-
-            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

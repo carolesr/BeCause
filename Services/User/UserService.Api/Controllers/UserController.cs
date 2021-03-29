@@ -16,28 +16,20 @@ namespace UserService.Api.Controllers
     [Route("User")]
     public class UserController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public UserController(IMediator mediator) : base (mediator)
-        {
-            _mediator = mediator;
-        }
+        public UserController(IMediator mediator) : base (mediator) { }
 
         /// <summary>
         /// Creates new User.
         /// </summary>
-        ///// <param name="request"></param>
+        /// <param name="request"></param>
         /// <returns>A newly created User</returns>
         /// <response code="201">Returns the newly created item</response>
-        /// <response code="400">If the item is null</response> 
-        [HttpGet]
+        /// <response code="400">Request object did not succeded validation</response> 
+        [HttpPost]
         [Route("CreateUser")]
-        public async Task<ActionResult> CreateUser()
+        public async Task<ActionResult> CreateUser(CreateUserRequest request)
         {
-            var request = new CreateUserRequest { Name="robson", Email = "email@email", Phone = 999999999 };
-            var response = await this.Handle(request);
-
-            return response;            
+            return await this.Handle(request);
         }
     }
 }

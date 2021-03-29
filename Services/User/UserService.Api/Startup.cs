@@ -1,4 +1,3 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,8 +8,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
-using UserService.Core.Mappers;
 using FluentValidation.AspNetCore;
+using System.Linq;
 
 namespace UserService.Api
 {
@@ -56,14 +55,10 @@ namespace UserService.Api
             #endregion
 
             #region AutoMapper
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => a.GetName().Name.StartsWith("UserService.Core")).ToArray();
+            services.AddAutoMapper(assemblies);
 
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
 
             #endregion
 

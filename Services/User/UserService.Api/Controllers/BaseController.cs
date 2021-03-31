@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using UserService.Core.Requests;
+using UserService.Core.Responses;
 
 namespace UserService.Api.Controllers
 {
@@ -18,8 +17,19 @@ namespace UserService.Api.Controllers
 
         public async Task<ActionResult> Handle(Request request)
         {
-            var result = await _mediator.Send(request);
-            return Ok(result);
+            try
+            {
+                var response = await _mediator.Send(request);
+
+                if (response == null || !response.Success)
+                    return BadRequest(response);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Response(ex.Message, false));
+            }
         }
     }
 }

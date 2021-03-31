@@ -24,7 +24,7 @@ namespace UserService.Api.Controllers
         /// <param name="request"></param>
         /// <returns>A newly created User</returns>
         /// <response code="201">Returns the newly created item</response>
-        /// <response code="400">Request object did not succeded validation</response> 
+        /// <response code="400">Request object did not succeded validation or some error occured</response> 
         [HttpPost]
         [Route("CreateUser")]
         public async Task<ActionResult> CreateUser(CreateUserRequest request)

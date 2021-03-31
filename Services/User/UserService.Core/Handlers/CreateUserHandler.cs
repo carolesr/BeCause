@@ -24,7 +24,6 @@ namespace UserService.Core.Handlers
 
         public Task<Response> CreateUser(CreateUserRequest request, CancellationToken cancellationToken)
         {
-            Response response = new Response();
 
             var user = _mapper.Map<User>(request);
 
@@ -33,7 +32,7 @@ namespace UserService.Core.Handlers
             var newUser = _mapper.Map<CreateUserResponse>(user);
             newUser.SignUpDate = DateTime.Now;
 
-            response = response.AddObject(newUser);
+            Response response = new Response(newUser);
 
             return Task.FromResult(response);
         }

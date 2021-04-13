@@ -1,10 +1,12 @@
 ﻿using System;
-using UserService.Core.Responses;
-using UserService.Core.Requests;
 using UserService.Domain.Entities;
 using System.Threading.Tasks;
 using System.Threading;
 using AutoMapper;
+using UserService.Core.Requests;
+using UserService.Core.Responses;
+using Foundation.Core.Handler;
+using Foundation.Core.Responses;
 
 namespace UserService.Core.Handlers
 {

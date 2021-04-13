@@ -1,6 +1,5 @@
-﻿using MediatR;
-using System;
-using UserService.Core.Responses;
+﻿using System;
+using Foundation.Core.Requests;
 
 namespace UserService.Core.Requests
 {

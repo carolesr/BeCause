@@ -1,14 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Threading;
-using UserService.Core.Handlers;
-using UserService.Core.Mappers;
-using UserService.Core.Requests;
-using UserService.Core.Responses;
-using UserService.Core.Validations;
+﻿using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using System.Threading.Tasks;
+using Foundation.Api.Controllers;
+using UserService.Core.Requests;
 
 namespace UserService.Api.Controllers
 {

@@ -10,6 +10,7 @@ using System.IO;
 using System.Reflection;
 using FluentValidation.AspNetCore;
 using System.Linq;
+using Foundation.Api;
 
 namespace UserService.Api
 {
@@ -50,7 +51,10 @@ namespace UserService.Api
 
             #region MediatR
 
-            services.AddMediatR(AppDomain.CurrentDomain.Load("UserService.Core"));
+            //services.AddMediatR(AppDomain.CurrentDomain.Load("UserService.Core"));
+            //var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "UserService.Core");
+            var assembly = AppDomain.CurrentDomain.Load("UserService.Core");
+            Foundation.Api.Startup.SetUpMediatorAssemblies(assembly);
 
             #endregion
 

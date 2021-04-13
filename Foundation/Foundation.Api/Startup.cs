@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace Foundation.Api
 {
@@ -23,9 +26,8 @@ namespace Foundation.Api
             services.AddControllers();
 
             #region MediatR
-
             // os serviços vao ter q mandar seus assemblies pra eu incluir aqui
-            services.AddMediatR(AppDomain.CurrentDomain.Load(""));
+            //services.AddMediatR(Assembly.Load("UserService.Core"));
 
             #endregion
         }
@@ -48,6 +50,13 @@ namespace Foundation.Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public static void SetUpMediatorAssemblies(this IServiceCollection services, Assembly assembly)
+        {
+            if (assembly == null)
+                throw new NullReferenceException();
+            services.AddMediatR(assembly);
         }
     }
 }

@@ -24,12 +24,6 @@ namespace Foundation.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            #region MediatR
-            // os serviços vao ter q mandar seus assemblies pra eu incluir aqui
-            //services.AddMediatR(Assembly.Load("UserService.Core"));
-
-            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,12 +45,6 @@ namespace Foundation.Api
                 endpoints.MapControllers();
             });
         }
-
-        public static void SetUpMediatorAssemblies(this IServiceCollection services, Assembly assembly)
-        {
-            if (assembly == null)
-                throw new NullReferenceException();
-            services.AddMediatR(assembly);
-        }
+        
     }
 }

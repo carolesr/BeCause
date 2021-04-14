@@ -51,18 +51,16 @@ namespace UserService.Api
 
             #region MediatR
 
-            //services.AddMediatR(AppDomain.CurrentDomain.Load("UserService.Core"));
-            //var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "UserService.Core");
             var assembly = AppDomain.CurrentDomain.Load("UserService.Core");
-            Foundation.Api.Startup.SetUpMediatorAssemblies(assembly);
+            services.SetUpMediatorAssemblies(assembly);
 
             #endregion
 
             #region AutoMapper
+
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(a => a.GetName().Name.StartsWith("UserService.Core")).ToArray();
             services.AddAutoMapper(assemblies);
-
 
             #endregion
 

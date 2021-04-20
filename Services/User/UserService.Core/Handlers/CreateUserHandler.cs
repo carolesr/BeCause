@@ -12,12 +12,7 @@ namespace UserService.Core.Handlers
 {
     public class CreateUserHandler : BaseHandler<CreateUserRequest>
     {
-        IMapper _mapper;
-
-        public CreateUserHandler(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
+        public CreateUserHandler(IMapper mapper) : base(mapper) {  }
 
         public override Task<Response> SafeExecuteHandler(CreateUserRequest request, CancellationToken cancellationToken)
         {

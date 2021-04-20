@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UserService.Core.Responses
+namespace Foundation.Core.Responses
 {
     public class Response
     {

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
+﻿using System;
+using Foundation.Core.Requests;
+using Foundation.Core.Responses;
 using MediatR;
-using UserService.Core.Requests;
-using UserService.Core.Responses;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
-namespace UserService.Api.Controllers
+namespace Foundation.Api.Controllers
 {
     public class BaseController : ControllerBase
     {

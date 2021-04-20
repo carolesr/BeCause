@@ -26,41 +26,16 @@ namespace UserService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
-            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(AppDomain.CurrentDomain.Load("UserService.Core")));
+            services.AddControllers();
 
-            #region Swagger
+            #region Set up frameworks assemblies in Foudation
 
-            // Register the Swagger generator
-            services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo
-                    {
-                        Version = "v1",
-                        Title = "BeCause API",
-                        Description = "A simple example ASP.NET Core Web API"
-                    });
-
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                    c.IncludeXmlComments(xmlPath);
-                });
-
-            #endregion
-
-            #region MediatR
-
-            var assembly = AppDomain.CurrentDomain.Load("UserService.Core");
-            services.SetUpMediatorAssemblies(assembly);
-
-            #endregion
-
-            #region AutoMapper
-
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetName().Name.StartsWith("UserService.Core")).ToArray();
-            services.AddAutoMapper(assemblies);
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            services.SetUpSwaggerAssemblies(executingAssembly);
+            var assemblyCore = AppDomain.CurrentDomain.Load("UserService.Core");
+            services.SetUpMediatorAssemblies(assemblyCore);
+            services.SetUpAutoMapperAssemblies(assemblyCore);
+            services.SetUpFluentValidationAssemblies(assemblyCore);
 
             #endregion
 

@@ -11,6 +11,8 @@ using System.Reflection;
 using FluentValidation.AspNetCore;
 using System.Linq;
 using Foundation.Api;
+using Microsoft.EntityFrameworkCore;
+using UserService.Repository.CommandDB;
 
 namespace UserService.Api
 {
@@ -27,6 +29,15 @@ namespace UserService.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            #region DB contexts
+
+            services.AddDbContext<Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //services.AddDatabaseDeveloperPageExceptionFilter();
+
+            #endregion
 
             #region Set up frameworks assemblies in Foudation
 

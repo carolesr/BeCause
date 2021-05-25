@@ -7,12 +7,18 @@ using UserService.Core.Requests;
 using UserService.Core.Responses;
 using Foundation.Core.Handler;
 using Foundation.Core.Responses;
+using UserService.Repository.Repositories;
+using UserService.Repository;
 
 namespace UserService.Core.Handlers
 {
     public class CreateUserHandler : BaseHandler<CreateUserRequest>
     {
-        public CreateUserHandler(IMapper mapper) : base(mapper) {  }
+        private readonly IUserRepository _repository;
+        public CreateUserHandler(IMapper mapper, IUserRepository repository) : base(mapper) 
+        {
+            _repository = repository;
+        }
 
         public override Task<Response> SafeExecuteHandler(CreateUserRequest request, CancellationToken cancellationToken)
         {
@@ -25,6 +31,7 @@ namespace UserService.Core.Handlers
             var user = _mapper.Map<User>(request);
 
             //user = _service.Create(user);
+            user = _repository.Create(user);
 
             var newUser = _mapper.Map<CreateUserResponse>(user);
             newUser.SignUpDate = DateTime.Now;

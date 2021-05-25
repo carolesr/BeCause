@@ -13,6 +13,8 @@ using System.Linq;
 using Foundation.Api;
 using Microsoft.EntityFrameworkCore;
 using UserService.Repository.CommandDB;
+using UserService.Repository;
+using UserService.Repository.Repositories;
 
 namespace UserService.Api
 {
@@ -34,6 +36,7 @@ namespace UserService.Api
 
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IUserRepository, UserRepository>();
 
             //services.AddDatabaseDeveloperPageExceptionFilter();
 

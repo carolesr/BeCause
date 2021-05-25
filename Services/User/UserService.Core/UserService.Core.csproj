@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Foundation\Foundation.Core\Foundation.Core.csproj" />
-    <ProjectReference Include="..\UserService.Domain\UserService.Domain.csproj" />
+    <ProjectReference Include="..\UserService.Repository\UserService.Repository.csproj" />
   </ItemGroup>
 
 </Project>

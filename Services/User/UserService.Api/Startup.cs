@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,14 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using System.IO;
 using System.Reflection;
-using FluentValidation.AspNetCore;
-using System.Linq;
 using Foundation.Api;
 using Microsoft.EntityFrameworkCore;
 using UserService.Repository.CommandDB;
-using UserService.Repository;
+using UserService.Repository.Interfaces;
 using UserService.Repository.Repositories;
 
 namespace UserService.Api
@@ -36,6 +32,7 @@ namespace UserService.Api
 
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(typeof(BaseIRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
 
             //services.AddDatabaseDeveloperPageExceptionFilter();

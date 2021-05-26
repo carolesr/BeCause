@@ -1,33 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UserService.Domain.Entities;
 using UserService.Repository.CommandDB;
+using UserService.Repository.Interfaces;
 
 namespace UserService.Repository.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        private readonly Context _context;
-        public UserRepository(Context context)
-        {
-            _context = context;
-        }
+        public UserRepository(Context context) : base(context) { }
 
-        public User Create(User newUser)
+        public void Create(User newUser)
         {
             try
             {
-                _context.Add(newUser);
-                _context.SaveChangesAsync();
-                return newUser;
+                Insert(newUser);
+                Commit();
             }
             catch (Exception ex)
             {
-                return null;
+                throw new Exception($"Couldn't retrieve entities: {ex.Message}");
             }
         }
 
-        public void Dispose() { }
+        public User Retrieve(int id)
+        {
+            if (id <= 0)
+                throw new Exception("id invalido");
+
+            return Get().FirstOrDefault(u => u.Id == id);
+        }
+
+        public IEnumerable<User> RetrieveAll()
+        {
+            return Get().AsEnumerable();
+        }
+
+        //public void Dispose() { }
     }
 }

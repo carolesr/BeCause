@@ -7,8 +7,7 @@ using UserService.Core.Requests;
 using UserService.Core.Responses;
 using Foundation.Core.Handler;
 using Foundation.Core.Responses;
-using UserService.Repository.Repositories;
-using UserService.Repository;
+using UserService.Repository.Interfaces;
 
 namespace UserService.Core.Handlers
 {
@@ -27,11 +26,10 @@ namespace UserService.Core.Handlers
 
         public Task<Response> CreateUser(CreateUserRequest request, CancellationToken cancellationToken)
         {
-
             var user = _mapper.Map<User>(request);
 
             //user = _service.Create(user);
-            user = _repository.Create(user);
+            _repository.Create(user);
 
             var newUser = _mapper.Map<CreateUserResponse>(user);
             newUser.SignUpDate = DateTime.Now;

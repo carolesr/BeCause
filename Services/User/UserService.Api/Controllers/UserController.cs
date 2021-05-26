@@ -25,5 +25,12 @@ namespace UserService.Api.Controllers
         {
             return await this.Handle(request);
         }
+
+        [HttpGet]
+        [Route("GetUsers")]
+        public async Task<ActionResult> GetUsers(GetUserRequest request)
+        {
+            return await this.Handle(request);
+        }
     }
 }

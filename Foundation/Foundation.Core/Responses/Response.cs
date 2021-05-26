@@ -18,12 +18,14 @@ namespace Foundation.Core.Responses
         public Response(string message, bool success)
         {
             Success = success;
+            if (Messages == null) Messages = new List<string>();
             AddMessage(message);
         }
 
         public Response(List<string> messages, bool success)
         {
             Success = success;
+            if (Messages == null) Messages = new List<string>();
             AddMessage(messages);
         }
 

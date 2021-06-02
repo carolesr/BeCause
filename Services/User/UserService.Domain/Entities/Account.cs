@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace UserService.Domain.Entities
 {
-    public class Account
+    public class Account : BaseEntity
     {
-        public Guid IdAccount { get; set; }
         public string Bank { get; set; }
         public int Number { get; set; }
         public int Agency { get; set; }

@@ -7,7 +7,7 @@ namespace UserService.Core.Services.Interfaces
     public interface IUserService
     {
         Response CreateUser(User user);
-
-        List<User> GetAllUsers();
+        List<User> GetAllUsers(bool activeOnly = false);
+        User GetUserById(int id);
     }
 }

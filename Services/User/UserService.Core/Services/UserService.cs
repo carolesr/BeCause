@@ -15,9 +15,14 @@ namespace UserService.Core.Services
             _repository = repository;
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetAllUsers(bool activeOnly = false)
         {
-            return _repository.Get().ToList();
+            return _repository.Get().Where(u => activeOnly ? u.Active : true).ToList();
+        }
+
+        public User GetUserById(int id)
+        {
+            return _repository.Get().FirstOrDefault(u => u.Id == id);
         }
 
         public Response CreateUser(User user)
@@ -25,7 +30,9 @@ namespace UserService.Core.Services
             if (CPFAlreadyExists(user.CPF))
                 return new Response($"User with CPF {user.CPF} already exists", false);
 
+            user.Active = true;
             _repository.Insert(user);
+
             return new Response("Success creating user", true);
         }
 

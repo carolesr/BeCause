@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UserService.Domain.Entities;
 
 namespace UserService.Repository.CommandDB
@@ -19,6 +17,7 @@ namespace UserService.Repository.CommandDB
             {
                 new User
                 {
+                    Active = true,
                     Name = "Caroline Rosa",
                     Email = "carol@gmail.com",
                     Phone = 1111111111,

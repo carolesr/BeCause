@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using UserService.Core.Requests;
 using UserService.Core.Services.Interfaces;
-using UserService.Repository.Interfaces;
 
 namespace UserService.Core.Handlers
 {
@@ -26,7 +25,7 @@ namespace UserService.Core.Handlers
 
         public Task<Response> GetUsers(GetUserRequest request, CancellationToken cancellationToken)
         {
-            var result = _service.GetAllUsers();
+            var result = _service.GetAllUsers(request.ActiveOnly);
 
             Response response = new Response(result);
 

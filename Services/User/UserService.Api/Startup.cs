@@ -73,6 +73,7 @@ namespace UserService.Api
                 endpoints.MapControllers();
             });
 
+            // TODO: mover isso pro foundation
             #region Swagger
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.

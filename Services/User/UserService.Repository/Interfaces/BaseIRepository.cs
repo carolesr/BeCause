@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using UserService.Domain.Entities;
 
 namespace UserService.Repository.Interfaces
 {
-    public interface BaseIRepository<T>// where T: class //(pq eu deveria colocar o where?)
+    public interface BaseIRepository<T> where T: BaseEntity
     {
-        void Insert(T entity);
-        void InsertMany(IEnumerable<T> entities);
-        void Update(T entity);
-        void UpdateMany(IEnumerable<T> entities);
-        void Delete(T entity);
-        void DeleteMany(IEnumerable<T> entities);
+        void Insert(T entity, bool commit = true);
+        void InsertMany(IEnumerable<T> entities, bool commit = true);
+        void Update(T entity, bool commit = true);
+        void UpdateMany(IEnumerable<T> entities, bool commit = true);
+        void Delete(T entity, bool commit = true);
+        void DeleteMany(IEnumerable<T> entities, bool commit = true);
         IQueryable<T> Get();
         void Commit();
     }

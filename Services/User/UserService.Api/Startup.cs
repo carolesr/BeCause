@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using UserService.Repository.CommandDB;
 using UserService.Repository.Interfaces;
 using UserService.Repository.Repositories;
+using UserService.Core.Services.Interfaces;
 
 namespace UserService.Api
 {
@@ -34,6 +35,7 @@ namespace UserService.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(BaseIRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, Core.Services.UserService>();
 
             //services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -1,20 +1,22 @@
 ﻿using AutoMapper;
 using Foundation.Core.Handler;
 using Foundation.Core.Responses;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UserService.Core.Requests;
+using UserService.Core.Services.Interfaces;
 using UserService.Repository.Interfaces;
 
 namespace UserService.Core.Handlers
 {
     public class GetUserHandler : BaseHandler<GetUserRequest>
     {
-        private readonly IUserRepository _repository;
+        private readonly IUserService _service;
 
-        public GetUserHandler(IMapper mapper, IUserRepository repoitory) : base(mapper)
+        public GetUserHandler(IMapper mapper, IUserService service) : base(mapper)
         {
-            _repository = repoitory;
+            _service = service;
         }
 
         public override Task<Response> SafeExecuteHandler(GetUserRequest request, CancellationToken cancellationToken)
@@ -24,7 +26,7 @@ namespace UserService.Core.Handlers
 
         public Task<Response> GetUsers(GetUserRequest request, CancellationToken cancellationToken)
         {
-            var result = _repository.RetrieveAll();
+            var result = _service.GetAllUsers();
 
             Response response = new Response(result);
 

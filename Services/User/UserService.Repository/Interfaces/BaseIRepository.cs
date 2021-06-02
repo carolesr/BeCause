@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UserService.Repository.Interfaces
 {
-    public interface BaseIRepository<T>// : IDisposable where T: class //(pq eu deveria colocar o where?)
+    public interface BaseIRepository<T>// where T: class //(pq eu deveria colocar o where?)
     {
         void Insert(T entity);
         void InsertMany(IEnumerable<T> entities);

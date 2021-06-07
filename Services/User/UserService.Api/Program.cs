@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using UserService.Repository.CommandDB;
+using UserService.Repository.SQLServer;
 using Microsoft.Extensions.Logging;
 
 namespace UserService.Api
@@ -26,7 +26,7 @@ namespace UserService.Api
                 try
                 {
                     var context = services.GetRequiredService<Context>();
-                    DbInitializaer.Initialize(context);
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {

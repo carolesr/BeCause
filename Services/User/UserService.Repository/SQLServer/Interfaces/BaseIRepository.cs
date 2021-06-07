@@ -2,9 +2,9 @@
 using System.Linq;
 using UserService.Domain.Entities;
 
-namespace UserService.Repository.Interfaces
+namespace UserService.Repository.SQLServer.Interfaces
 {
-    public interface BaseIRepository<T> where T: BaseEntity
+    public interface BaseIRepository<T> where T : BaseEntity
     {
         void Insert(T entity, bool commit = true);
         void InsertMany(IEnumerable<T> entities, bool commit = true);

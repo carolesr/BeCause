@@ -2,9 +2,9 @@
 using System.Linq;
 using UserService.Domain.Entities;
 
-namespace UserService.Repository.CommandDB
+namespace UserService.Repository.SQLServer
 {
-    public static class DbInitializaer
+    public class DbInitializer
     {
         public static void Initialize(Context context)
         {

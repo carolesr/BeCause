@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserService.Domain.Entities;
 
-namespace UserService.Repository.CommandDB
+namespace UserService.Repository.SQLServer
 {
     public class Context : DbContext
     {

@@ -7,7 +7,6 @@ using UserService.Core.Requests;
 using UserService.Core.Responses;
 using Foundation.Core.Handler;
 using Foundation.Core.Responses;
-using UserService.Repository.Interfaces;
 using UserService.Core.Services.Interfaces;
 
 namespace UserService.Core.Handlers

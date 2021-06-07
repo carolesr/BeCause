@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UserService.Domain.Entities;
-using UserService.Repository.CommandDB;
-using UserService.Repository.Interfaces;
+using UserService.Repository.SQLServer.Interfaces;
 
-namespace UserService.Repository.Repositories
+namespace UserService.Repository.SQLServer.Repositories
 {
     public class BaseRepository<T> : BaseIRepository<T> where T : BaseEntity
     {

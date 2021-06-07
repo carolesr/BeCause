@@ -8,9 +8,9 @@ using System;
 using System.Reflection;
 using Foundation.Api;
 using Microsoft.EntityFrameworkCore;
-using UserService.Repository.CommandDB;
-using UserService.Repository.Interfaces;
-using UserService.Repository.Repositories;
+using UserService.Repository.SQLServer;
+using UserService.Repository.SQLServer.Interfaces;
+using UserService.Repository.SQLServer.Repositories;
 using UserService.Core.Services.Interfaces;
 
 namespace UserService.Api

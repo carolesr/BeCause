@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UserService.Core.Services.Interfaces;
 using UserService.Domain.Entities;
-using UserService.Repository.Interfaces;
+using UserService.Repository.SQLServer.Interfaces;
 
 namespace UserService.Core.Services
 {

@@ -1,6 +1,6 @@
 ﻿using UserService.Domain.Entities;
 
-namespace UserService.Repository.Interfaces
+namespace UserService.Repository.SQLServer.Interfaces
 {
     public interface IUserRepository : BaseIRepository<User>
     {

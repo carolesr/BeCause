@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UserService.Domain.Entities;
+using Foundation.Domain.Entities;
 
-namespace UserService.Repository.SQLServer.Interfaces
+namespace Foundation.Repository.SQLServer.Interfaces
 {
     public interface BaseIRepository<T> where T : BaseEntity
     {

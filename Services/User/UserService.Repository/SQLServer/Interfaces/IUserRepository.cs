@@ -1,4 +1,5 @@
-﻿using UserService.Domain.Entities;
+﻿using Foundation.Repository.SQLServer.Interfaces;
+using UserService.Domain.Entities;
 
 namespace UserService.Repository.SQLServer.Interfaces
 {

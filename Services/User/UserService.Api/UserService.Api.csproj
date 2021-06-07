@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Foundation\Foundation.Api\Foundation.Api.csproj" />
-    <ProjectReference Include="..\..\..\Foundation\Foundation.Core\Foundation.Core.csproj" />
     <ProjectReference Include="..\UserService.Core\UserService.Core.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace UserService.Domain.Entities
+namespace Foundation.Domain.Entities
 {
     public class BaseEntity
     {

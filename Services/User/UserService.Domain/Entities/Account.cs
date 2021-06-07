@@ -1,4 +1,5 @@
-﻿
+﻿using Foundation.Domain.Entities;
+
 namespace UserService.Domain.Entities
 {
     public class Account : BaseEntity

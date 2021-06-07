@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Foundation.Repository\Foundation.Repository.csproj" />
-    <ProjectReference Include="..\UserService.Domain\UserService.Domain.csproj" />
+    <ProjectReference Include="..\Foundation.Domain\Foundation.Domain.csproj" />
   </ItemGroup>
 
 </Project>

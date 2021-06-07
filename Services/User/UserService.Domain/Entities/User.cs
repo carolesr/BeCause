@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foundation.Domain.Entities;
+using System;
 
 namespace UserService.Domain.Entities
 {

@@ -2,17 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UserService.Domain.Entities;
-using UserService.Repository.SQLServer.Interfaces;
+using Foundation.Domain.Entities;
+using Foundation.Repository.SQLServer.Interfaces;
 
-namespace UserService.Repository.SQLServer.Repositories
+namespace Foundation.Repository.SQLServer.Repositories
 {
     public class BaseRepository<T> : BaseIRepository<T> where T : BaseEntity
     {
-        private readonly Context _context;
+        private readonly DbContext _context;
         private DbSet<T> entities;
 
-        public BaseRepository(Context context)
+        public BaseRepository(DbContext context)
         {
             _context = context;
             entities = context.Set<T>();

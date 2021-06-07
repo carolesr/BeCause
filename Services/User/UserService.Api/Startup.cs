@@ -12,6 +12,8 @@ using UserService.Repository.SQLServer;
 using UserService.Repository.SQLServer.Interfaces;
 using UserService.Repository.SQLServer.Repositories;
 using UserService.Core.Services.Interfaces;
+using Foundation.Repository.SQLServer.Interfaces;
+using Foundation.Repository.SQLServer.Repositories;
 
 namespace UserService.Api
 {
